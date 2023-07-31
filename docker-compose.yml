@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+
+  mongodb:
+    image: mongo
+    container_name: "reactive-mongo"
+    restart: always
+    hostname: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./db:/data/db
+
+  spring:
+    container_name: "reactive-spring"
+    restart: always
+    build: .
+    ports:
+      - 8000:8000
+    depends_on:
+      - mongodb
